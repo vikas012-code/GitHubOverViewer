@@ -18576,13 +18576,13 @@ var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _indexCss = require("../index.css");
 var _navbar = require("./Navbar");
 var _navbarDefault = parcelHelpers.interopDefault(_navbar);
+var _skelatonloading = require("./skelatonloading");
+var _skelatonloadingDefault = parcelHelpers.interopDefault(_skelatonloading);
 function App() {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navbarDefault.default), {
-            cl: true
-        }, void 0, false, {
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navbarDefault.default), {}, void 0, false, {
             fileName: "src/components/App.jsx",
-            lineNumber: 7,
+            lineNumber: 8,
             columnNumber: 9
         }, this)
     }, void 0, false);
@@ -18596,7 +18596,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","../index.css":"irmnC","./Navbar":"4U1ks","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"irmnC":[function() {},{}],"4U1ks":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","../index.css":"irmnC","./Navbar":"4U1ks","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./skelatonloading":"6PtiB"}],"irmnC":[function() {},{}],"4U1ks":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$aed9 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -18610,18 +18610,31 @@ var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _userDetail = require("./UserDetail");
 var _userDetailDefault = parcelHelpers.interopDefault(_userDetail);
+var _skelatonloading = require("./skelatonloading");
+var _skelatonloadingDefault = parcelHelpers.interopDefault(_skelatonloading);
 var _indexCss = require("../index.css");
 var _s = $RefreshSig$();
 function Navbar() {
     _s();
-    const [UserName, setUsername] = (0, _react.useState)("");
-    let name = UserName;
-    let data;
+    const [userName, setUsername] = (0, _react.useState)("");
+    const [res, setRes] = (0, _react.useState)([]);
+    const [isLoading, setIsLoading] = (0, _react.useState)(false);
+    const fun = async ()=>{
+        try {
+            setIsLoading(true);
+            const response = await fetch(`https://api.github.com/users/${userName}`);
+            const data = await response.json();
+            setRes(data);
+            setIsLoading(false);
+        } catch (e) {
+            console.log(e);
+            setIsLoading(false);
+        }
+    };
     (0, _react.useEffect)(()=>{
-        console.log(name);
-        fetch(`https://api.github.com/users/${name}`).then((res)=>res.json()).then((data)=>data).catch((err)=>console.log(err));
+        userName && fun();
     }, [
-        name
+        userName
     ]);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: [
@@ -18636,14 +18649,14 @@ function Navbar() {
                                 className: "w-9"
                             }, void 0, false, {
                                 fileName: "src/components/Navbar.jsx",
-                                lineNumber: 22,
+                                lineNumber: 34,
                                 columnNumber: 13
                             }, this),
                             " Github Username"
                         ]
                     }, void 0, true, {
                         fileName: "src/components/Navbar.jsx",
-                        lineNumber: 21,
+                        lineNumber: 33,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -18651,33 +18664,34 @@ function Navbar() {
                         placeholder: "Enter UserName",
                         className: "w-96 h-7 border-2 border-cyan-600 rounded-md",
                         onKeyDown: (e)=>{
-                            if (e.key == 'Enter') {
-                                setUsername(e.target.value);
-                                name = UserName;
-                            }
+                            if (e.key == "Enter") setUsername(e.target.value);
                         }
                     }, void 0, false, {
                         fileName: "src/components/Navbar.jsx",
-                        lineNumber: 24,
+                        lineNumber: 36,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/Navbar.jsx",
-                lineNumber: 20,
+                lineNumber: 32,
                 columnNumber: 9
             }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _userDetailDefault.default), {
-                data: data
+            userName ? isLoading ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _skelatonloadingDefault.default), {}, void 0, false, {
+                fileName: "src/components/Navbar.jsx",
+                lineNumber: 42,
+                columnNumber: 34
+            }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _userDetailDefault.default), {
+                data: res
             }, void 0, false, {
                 fileName: "src/components/Navbar.jsx",
-                lineNumber: 31,
-                columnNumber: 9
-            }, this)
+                lineNumber: 42,
+                columnNumber: 49
+            }, this) : ""
         ]
     }, void 0, true);
 }
-_s(Navbar, "O9iUMFhceixRaFMokuAkKf33xt0=");
+_s(Navbar, "JtlE+JspZDFvuoqvdSVpBG6qiq8=");
 _c = Navbar;
 var _c;
 $RefreshReg$(_c, "Navbar");
@@ -18687,7 +18701,7 @@ $RefreshReg$(_c, "Navbar");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","../index.css":"irmnC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react":"21dqq","./UserDetail":"eqvw4"}],"irmnC":[function() {},{}],"gkKU3":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","../index.css":"irmnC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react":"21dqq","./UserDetail":"eqvw4","./skelatonloading":"6PtiB"}],"irmnC":[function() {},{}],"gkKU3":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -18873,9 +18887,21 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>UserDetail);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _s = $RefreshSig$();
 function UserDetail({ data }) {
-    console.log(data);
-    let repo = [];
+    _s();
+    const [repo, setRepo] = (0, _react.useState)([]);
+    const fun = async ()=>{
+        const response2 = await fetch(`https://api.github.com/users/${data.login}/repos`);
+        const data2 = await response2.json();
+        setRepo(data2);
+    };
+    (0, _react.useEffect)(()=>{
+        data && fun();
+    }, [
+        data
+    ]);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
             className: "flex-col justify-items-center",
@@ -18887,21 +18913,21 @@ function UserDetail({ data }) {
                             children: "Overview For "
                         }, void 0, false, {
                             fileName: "src/components/UserDetail.jsx",
-                            lineNumber: 11,
+                            lineNumber: 20,
                             columnNumber: 17
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
                             className: "text-cyan-400",
-                            children: name ? data ? data : "user not found" : "User"
+                            children: data.login ? data.login : "User"
                         }, void 0, false, {
                             fileName: "src/components/UserDetail.jsx",
-                            lineNumber: 12,
+                            lineNumber: 21,
                             columnNumber: 17
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/UserDetail.jsx",
-                    lineNumber: 10,
+                    lineNumber: 19,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -18913,7 +18939,7 @@ function UserDetail({ data }) {
                             alt: "Profile"
                         }, void 0, false, {
                             fileName: "src/components/UserDetail.jsx",
-                            lineNumber: 15,
+                            lineNumber: 24,
                             columnNumber: 17
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -18924,7 +18950,7 @@ function UserDetail({ data }) {
                                     children: data ? data.login : "user"
                                 }, void 0, false, {
                                     fileName: "src/components/UserDetail.jsx",
-                                    lineNumber: 17,
+                                    lineNumber: 26,
                                     columnNumber: 21
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -18936,7 +18962,7 @@ function UserDetail({ data }) {
                                             alt: "location"
                                         }, void 0, false, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 18,
+                                            lineNumber: 27,
                                             columnNumber: 69
                                         }, this),
                                         " ",
@@ -18944,7 +18970,7 @@ function UserDetail({ data }) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/UserDetail.jsx",
-                                    lineNumber: 18,
+                                    lineNumber: 27,
                                     columnNumber: 21
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
@@ -18957,7 +18983,7 @@ function UserDetail({ data }) {
                                             alt: "link"
                                         }, void 0, false, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 19,
+                                            lineNumber: 28,
                                             columnNumber: 85
                                         }, this),
                                         " ",
@@ -18965,19 +18991,19 @@ function UserDetail({ data }) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/UserDetail.jsx",
-                                    lineNumber: 19,
+                                    lineNumber: 28,
                                     columnNumber: 21
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/UserDetail.jsx",
-                            lineNumber: 16,
+                            lineNumber: 25,
                             columnNumber: 17
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/UserDetail.jsx",
-                    lineNumber: 14,
+                    lineNumber: 23,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -18985,13 +19011,11 @@ function UserDetail({ data }) {
                     children: [
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                             className: " w-16 h-8 rounded-lg border-none bg-slate-200",
-                            onClick: ()=>{
-                                open(data ? data.url : "");
-                            },
+                            onClick: ()=>{},
                             children: "Follow"
                         }, void 0, false, {
                             fileName: "src/components/UserDetail.jsx",
-                            lineNumber: 23,
+                            lineNumber: 32,
                             columnNumber: 17
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -19005,13 +19029,13 @@ function UserDetail({ data }) {
                                             children: data ? data.followers : 0
                                         }, void 0, false, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 28,
+                                            lineNumber: 37,
                                             columnNumber: 37
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/UserDetail.jsx",
-                                    lineNumber: 28,
+                                    lineNumber: 37,
                                     columnNumber: 21
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -19022,13 +19046,13 @@ function UserDetail({ data }) {
                                             children: data ? data.following : 0
                                         }, void 0, false, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 29,
+                                            lineNumber: 38,
                                             columnNumber: 36
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/UserDetail.jsx",
-                                    lineNumber: 29,
+                                    lineNumber: 38,
                                     columnNumber: 21
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -19039,13 +19063,13 @@ function UserDetail({ data }) {
                                             children: data ? data.public_repos : 0
                                         }, void 0, false, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 30,
+                                            lineNumber: 39,
                                             columnNumber: 39
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/UserDetail.jsx",
-                                    lineNumber: 30,
+                                    lineNumber: 39,
                                     columnNumber: 21
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -19056,25 +19080,25 @@ function UserDetail({ data }) {
                                             children: data ? data.public_gists : 0
                                         }, void 0, false, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 31,
+                                            lineNumber: 40,
                                             columnNumber: 39
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/UserDetail.jsx",
-                                    lineNumber: 31,
+                                    lineNumber: 40,
                                     columnNumber: 21
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/UserDetail.jsx",
-                            lineNumber: 27,
+                            lineNumber: 36,
                             columnNumber: 17
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/UserDetail.jsx",
-                    lineNumber: 22,
+                    lineNumber: 31,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -19085,7 +19109,7 @@ function UserDetail({ data }) {
                             children: "Repositories"
                         }, void 0, false, {
                             fileName: "src/components/UserDetail.jsx",
-                            lineNumber: 35,
+                            lineNumber: 44,
                             columnNumber: 17
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -19103,7 +19127,7 @@ function UserDetail({ data }) {
                                                     alt: "repo"
                                                 }, void 0, false, {
                                                     fileName: "src/components/UserDetail.jsx",
-                                                    lineNumber: 38,
+                                                    lineNumber: 47,
                                                     columnNumber: 66
                                                 }, this),
                                                 " ",
@@ -19111,7 +19135,7 @@ function UserDetail({ data }) {
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 38,
+                                            lineNumber: 47,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -19119,7 +19143,7 @@ function UserDetail({ data }) {
                                             children: data ? repo[0] ? repo[0].description : "not found" : "not found"
                                         }, void 0, false, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 39,
+                                            lineNumber: 48,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -19133,8 +19157,8 @@ function UserDetail({ data }) {
                                                     alt: "like"
                                                 }, void 0, false, {
                                                     fileName: "src/components/UserDetail.jsx",
-                                                    lineNumber: 40,
-                                                    columnNumber: 115
+                                                    lineNumber: 49,
+                                                    columnNumber: 116
                                                 }, this),
                                                 " 0 ",
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
@@ -19143,20 +19167,20 @@ function UserDetail({ data }) {
                                                     alt: ""
                                                 }, void 0, false, {
                                                     fileName: "src/components/UserDetail.jsx",
-                                                    lineNumber: 40,
-                                                    columnNumber: 240
+                                                    lineNumber: 49,
+                                                    columnNumber: 241
                                                 }, this),
                                                 " 0 "
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 40,
+                                            lineNumber: 49,
                                             columnNumber: 25
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/UserDetail.jsx",
-                                    lineNumber: 37,
+                                    lineNumber: 46,
                                     columnNumber: 21
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -19171,7 +19195,7 @@ function UserDetail({ data }) {
                                                     alt: "repo"
                                                 }, void 0, false, {
                                                     fileName: "src/components/UserDetail.jsx",
-                                                    lineNumber: 43,
+                                                    lineNumber: 52,
                                                     columnNumber: 62
                                                 }, this),
                                                 " ",
@@ -19179,7 +19203,7 @@ function UserDetail({ data }) {
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 43,
+                                            lineNumber: 52,
                                             columnNumber: 21
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -19187,7 +19211,7 @@ function UserDetail({ data }) {
                                             children: data ? repo[1] ? repo[1].description : "not found" : "not found"
                                         }, void 0, false, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 44,
+                                            lineNumber: 53,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -19201,8 +19225,8 @@ function UserDetail({ data }) {
                                                     alt: "like"
                                                 }, void 0, false, {
                                                     fileName: "src/components/UserDetail.jsx",
-                                                    lineNumber: 45,
-                                                    columnNumber: 114
+                                                    lineNumber: 54,
+                                                    columnNumber: 115
                                                 }, this),
                                                 " 0 ",
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
@@ -19211,20 +19235,20 @@ function UserDetail({ data }) {
                                                     alt: ""
                                                 }, void 0, false, {
                                                     fileName: "src/components/UserDetail.jsx",
-                                                    lineNumber: 45,
-                                                    columnNumber: 239
+                                                    lineNumber: 54,
+                                                    columnNumber: 240
                                                 }, this),
                                                 " 0 "
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 45,
+                                            lineNumber: 54,
                                             columnNumber: 25
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/UserDetail.jsx",
-                                    lineNumber: 42,
+                                    lineNumber: 51,
                                     columnNumber: 21
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -19239,7 +19263,7 @@ function UserDetail({ data }) {
                                                     alt: "repo"
                                                 }, void 0, false, {
                                                     fileName: "src/components/UserDetail.jsx",
-                                                    lineNumber: 48,
+                                                    lineNumber: 57,
                                                     columnNumber: 62
                                                 }, this),
                                                 " ",
@@ -19247,7 +19271,7 @@ function UserDetail({ data }) {
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 48,
+                                            lineNumber: 57,
                                             columnNumber: 21
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -19255,7 +19279,7 @@ function UserDetail({ data }) {
                                             children: data ? repo[2] ? repo[2].description : "not found" : "not found"
                                         }, void 0, false, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 49,
+                                            lineNumber: 58,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -19269,8 +19293,8 @@ function UserDetail({ data }) {
                                                     alt: "like"
                                                 }, void 0, false, {
                                                     fileName: "src/components/UserDetail.jsx",
-                                                    lineNumber: 50,
-                                                    columnNumber: 114
+                                                    lineNumber: 59,
+                                                    columnNumber: 115
                                                 }, this),
                                                 " 0 ",
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
@@ -19279,42 +19303,43 @@ function UserDetail({ data }) {
                                                     alt: ""
                                                 }, void 0, false, {
                                                     fileName: "src/components/UserDetail.jsx",
-                                                    lineNumber: 50,
-                                                    columnNumber: 239
+                                                    lineNumber: 59,
+                                                    columnNumber: 240
                                                 }, this),
                                                 " 0 "
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 50,
+                                            lineNumber: 59,
                                             columnNumber: 25
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/UserDetail.jsx",
-                                    lineNumber: 47,
+                                    lineNumber: 56,
                                     columnNumber: 21
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/UserDetail.jsx",
-                            lineNumber: 36,
+                            lineNumber: 45,
                             columnNumber: 17
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/UserDetail.jsx",
-                    lineNumber: 34,
+                    lineNumber: 43,
                     columnNumber: 13
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/components/UserDetail.jsx",
-            lineNumber: 9,
+            lineNumber: 18,
             columnNumber: 9
         }, this)
     }, void 0, false);
 }
+_s(UserDetail, "18V2KHbT09HLwXEwgZe9CbhvQYQ=");
 _c = UserDetail;
 var _c;
 $RefreshReg$(_c, "UserDetail");
@@ -19324,6 +19349,180 @@ $RefreshReg$(_c, "UserDetail");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}]},["aQL8O","9mu7C","8lqZg"], "8lqZg", "parcelRequire94c2")
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react":"21dqq"}],"6PtiB":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$e04e = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$e04e.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>Skeleton);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _reactLoadingSkeleton = require("react-loading-skeleton");
+var _reactLoadingSkeletonDefault = parcelHelpers.interopDefault(_reactLoadingSkeleton);
+var _skeletonCss = require("react-loading-skeleton/dist/skeleton.css");
+function Skeleton() {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                className: "w-[50vw] text-5xl mx-auto",
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLoadingSkeletonDefault.default), {}, void 0, false, {
+                    fileName: "src/components/skelatonloading.jsx",
+                    lineNumber: 7,
+                    columnNumber: 52
+                }, this)
+            }, void 0, false, {
+                fileName: "src/components/skelatonloading.jsx",
+                lineNumber: 7,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "flex justify-center items-center",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLoadingSkeletonDefault.default), {
+                        className: "h-[10rem]  w-[10rem] mx-auto mb-10 rounded-full",
+                        count: 1
+                    }, void 0, false, {
+                        fileName: "src/components/skelatonloading.jsx",
+                        lineNumber: 9,
+                        columnNumber: 14
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLoadingSkeletonDefault.default), {
+                        className: "h-[2rem] w-[10rem] my-2 relative -top-5 ml-4",
+                        count: 3
+                    }, void 0, false, {
+                        fileName: "src/components/skelatonloading.jsx",
+                        lineNumber: 10,
+                        columnNumber: 14
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/skelatonloading.jsx",
+                lineNumber: 8,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactLoadingSkeletonDefault.default), {
+                className: "h-20 w-[60vw] mx-auto mt-6 ",
+                count: 2
+            }, void 0, false, {
+                fileName: "src/components/skelatonloading.jsx",
+                lineNumber: 12,
+                columnNumber: 10
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/skelatonloading.jsx",
+        lineNumber: 6,
+        columnNumber: 7
+    }, this);
+}
+_c = (0, _reactLoadingSkeletonDefault.default);
+var _c;
+$RefreshReg$(_c, "Skeleton");
+
+  $parcel$ReactRefreshHelpers$e04e.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react-loading-skeleton":"hqjHO","react-loading-skeleton/dist/skeleton.css":"3ua27","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"hqjHO":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "SkeletonTheme", ()=>SkeletonTheme);
+parcelHelpers.export(exports, "default", ()=>Skeleton);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+'use client';
+/**
+ * @internal
+ */ const SkeletonThemeContext = (0, _reactDefault.default).createContext({});
+/* eslint-disable react/no-array-index-key */ const defaultEnableAnimation = true;
+// For performance & cleanliness, don't add any inline styles unless we have to
+function styleOptionsToCssProperties({ baseColor, highlightColor, width, height, borderRadius, circle, direction, duration, enableAnimation = defaultEnableAnimation, customHighlightBackground }) {
+    const style = {};
+    if (direction === 'rtl') style['--animation-direction'] = 'reverse';
+    if (typeof duration === 'number') style['--animation-duration'] = `${duration}s`;
+    if (!enableAnimation) style['--pseudo-element-display'] = 'none';
+    if (typeof width === 'string' || typeof width === 'number') style.width = width;
+    if (typeof height === 'string' || typeof height === 'number') style.height = height;
+    if (typeof borderRadius === 'string' || typeof borderRadius === 'number') style.borderRadius = borderRadius;
+    if (circle) style.borderRadius = '50%';
+    if (typeof baseColor !== 'undefined') style['--base-color'] = baseColor;
+    if (typeof highlightColor !== 'undefined') style['--highlight-color'] = highlightColor;
+    if (typeof customHighlightBackground === 'string') style['--custom-highlight-background'] = customHighlightBackground;
+    return style;
+}
+function Skeleton({ count = 1, wrapper: Wrapper, className: customClassName, containerClassName, containerTestId, circle = false, style: styleProp, ...originalPropsStyleOptions }) {
+    var _a, _b, _c;
+    const contextStyleOptions = (0, _reactDefault.default).useContext(SkeletonThemeContext);
+    const propsStyleOptions = {
+        ...originalPropsStyleOptions
+    };
+    // DO NOT overwrite style options from the context if `propsStyleOptions`
+    // has properties explicity set to undefined
+    for (const [key, value] of Object.entries(originalPropsStyleOptions))if (typeof value === 'undefined') delete propsStyleOptions[key];
+    // Props take priority over context
+    const styleOptions = {
+        ...contextStyleOptions,
+        ...propsStyleOptions,
+        circle
+    };
+    // `styleProp` has the least priority out of everything
+    const style = {
+        ...styleProp,
+        ...styleOptionsToCssProperties(styleOptions)
+    };
+    let className = 'react-loading-skeleton';
+    if (customClassName) className += ` ${customClassName}`;
+    const inline = (_a = styleOptions.inline) !== null && _a !== void 0 ? _a : false;
+    const elements = [];
+    const countCeil = Math.ceil(count);
+    for(let i = 0; i < countCeil; i++){
+        let thisStyle = style;
+        if (countCeil > count && i === countCeil - 1) {
+            // count is not an integer and we've reached the last iteration of
+            // the loop, so add a "fractional" skeleton.
+            //
+            // For example, if count is 3.5, we've already added 3 full
+            // skeletons, so now we add one more skeleton that is 0.5 times the
+            // original width.
+            const width = (_b = thisStyle.width) !== null && _b !== void 0 ? _b : '100%'; // 100% is the default since that's what's in the CSS
+            const fractionalPart = count % 1;
+            const fractionalWidth = typeof width === 'number' ? width * fractionalPart : `calc(${width} * ${fractionalPart})`;
+            thisStyle = {
+                ...thisStyle,
+                width: fractionalWidth
+            };
+        }
+        const skeletonSpan = (0, _reactDefault.default).createElement("span", {
+            className: className,
+            style: thisStyle,
+            key: i
+        }, "\u200C");
+        if (inline) elements.push(skeletonSpan);
+        else // Without the <br />, the skeleton lines will all run together if
+        // `width` is specified
+        elements.push((0, _reactDefault.default).createElement((0, _reactDefault.default).Fragment, {
+            key: i
+        }, skeletonSpan, (0, _reactDefault.default).createElement("br", null)));
+    }
+    return (0, _reactDefault.default).createElement("span", {
+        className: containerClassName,
+        "data-testid": containerTestId,
+        "aria-live": "polite",
+        "aria-busy": (_c = styleOptions.enableAnimation) !== null && _c !== void 0 ? _c : defaultEnableAnimation
+    }, Wrapper ? elements.map((el, i)=>(0, _reactDefault.default).createElement(Wrapper, {
+            key: i
+        }, el)) : elements);
+}
+function SkeletonTheme({ children, ...styleOptions }) {
+    return (0, _reactDefault.default).createElement(SkeletonThemeContext.Provider, {
+        value: styleOptions
+    }, children);
+}
+
+},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3ua27":[function() {},{}]},["aQL8O","9mu7C","8lqZg"], "8lqZg", "parcelRequire94c2")
 
 //# sourceMappingURL=index.975ef6c8.js.map

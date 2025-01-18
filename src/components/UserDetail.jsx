@@ -1,15 +1,24 @@
-
+import { useEffect, useState } from "react"
 
 
 export default function UserDetail({data}){
-    console.log(data)
-    let repo=[]
+    const [repo ,setRepo]=useState([])
+    const fun=async()=>{
+            const response2 = await fetch(`https://api.github.com/users/${data.login}/repos`)
+            const data2 = await  response2.json()
+            setRepo(data2)
+            }
+
+            useEffect(() => {
+                data && fun();
+            },[data])
+    
     return(
         <>
         <div className="flex-col justify-items-center">
             <div className="text-3xl font-sans flex gap-3 ">
                 <h3 >Overview For </h3>
-                <h3 className="text-cyan-400">{name ? data ? data: "user not found"  : "User"}</h3>
+                <h3 className="text-cyan-400">{data.login? data.login: "User"}</h3>
             </div>
             <div className=" flex gap-5 font-sans font-medium">
                 <img className="w-28 h-28 rounded-full" src={data && data.avatar_url?data.avatar_url:"https://img.freepik.com/premium-vector/user-icons-includes-user-icons-people-icons-symbols-premiumquality-graphic-design-elements_981536-526.jpg?semt=ais_hybrid"} alt="Profile" />
@@ -21,7 +30,7 @@ export default function UserDetail({data}){
             </div>
             <div className="flex-col justify-items-center mt-2">
                 <button className=" w-16 h-8 rounded-lg border-none bg-slate-200"onClick={()=>{
-                    open(data?data.url:"")
+                    
                 }
                 } >Follow</button>
                 <div className="flex gap-10 text-[0.7rem] text-blue-950 font-sans font-medium mt-4">
@@ -37,17 +46,17 @@ export default function UserDetail({data}){
                     <div className="border-solid border border-gray-400 w-[10rem] min-h-[5rem] rounded-md pl-2">
                         <p className="font-medium text-blue-800"><img  className="w-[0.54rem]" src="https://www.svgrepo.com/show/448449/git-repo.svg" alt="repo" /> { data ? repo[0] ? repo[0].name :"not found" :"not found" }</p>
                         <p className="text-gray-600" >{data ? repo[0]? repo[0].description:"not found" :"not found"}</p>
-                        <p className="text-gray-600">{data ?  repo[0]?repo[0].language:"not found" :"not found"}  <img  className="w-[0.6rem]" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Five-pointed_star.svg" alt="like" /> 0 <img className="h-[0.5rem]" src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Octicons-repo-forked.svg" alt="" /> 0 </p>
+                        <p className="text-gray-600">{data ?  repo[0]? repo[0].language:"not found" :"not found"}  <img  className="w-[0.6rem]" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Five-pointed_star.svg" alt="like" /> 0 <img className="h-[0.5rem]" src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Octicons-repo-forked.svg" alt="" /> 0 </p>
                     </div>
                     <div className="border-solid border border-gray-400 w-[10rem] min-h-[5rem] rounded-md pl-2">
                     <p className="font-medium text-blue-800"><img  className="w-[0.54rem]" src="https://www.svgrepo.com/show/448449/git-repo.svg" alt="repo" /> {data ? repo[1] ? repo[1].name :"not found" :"not found" }</p>
                         <p className="text-gray-600" >{data ? repo[1]? repo[1].description:"not found" :"not found"}</p>
-                        <p className="text-gray-600">{data ?  repo[1]?repo[1].language:"not found" :"not found"} <img  className="w-[0.6rem]" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Five-pointed_star.svg" alt="like" /> 0 <img className="h-[0.5rem]" src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Octicons-repo-forked.svg" alt="" /> 0 </p>
+                        <p className="text-gray-600">{data ?  repo[1]? repo[1].language:"not found" :"not found"} <img  className="w-[0.6rem]" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Five-pointed_star.svg" alt="like" /> 0 <img className="h-[0.5rem]" src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Octicons-repo-forked.svg" alt="" /> 0 </p>
                     </div>
                     <div className="border-solid border border-gray-400 w-[10rem] min-h-[5rem] rounded-md pl-2">
                     <p className="font-medium text-blue-800"><img  className="w-[0.54rem]" src="https://www.svgrepo.com/show/448449/git-repo.svg" alt="repo" /> {data ? repo[2] ? repo[2].name :"not found" :"not found" }</p>
                         <p className="text-gray-600" >{data ? repo[2]? repo[2].description:"not found" :"not found"}</p>
-                        <p className="text-gray-600">{data ?  repo[2]?repo[2].language:"not found" :"not found"} <img  className="w-[0.6rem]" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Five-pointed_star.svg" alt="like" /> 0 <img className="h-[0.5rem]" src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Octicons-repo-forked.svg" alt="" /> 0 </p>
+                        <p className="text-gray-600">{data ?  repo[2]? repo[2].language:"not found" :"not found"} <img  className="w-[0.6rem]" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Five-pointed_star.svg" alt="like" /> 0 <img className="h-[0.5rem]" src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Octicons-repo-forked.svg" alt="" /> 0 </p>
                     </div>
                 </div>
             </div>
