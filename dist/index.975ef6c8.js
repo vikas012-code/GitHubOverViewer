@@ -18616,6 +18616,13 @@ function Navbar() {
     _s();
     const [UserName, setUsername] = (0, _react.useState)("");
     let name = UserName;
+    let data;
+    (0, _react.useEffect)(()=>{
+        console.log(name);
+        fetch(`https://api.github.com/users/${name}`).then((res)=>res.json()).then((data)=>data).catch((err)=>console.log(err));
+    }, [
+        name
+    ]);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -18629,14 +18636,14 @@ function Navbar() {
                                 className: "w-9"
                             }, void 0, false, {
                                 fileName: "src/components/Navbar.jsx",
-                                lineNumber: 12,
+                                lineNumber: 22,
                                 columnNumber: 13
                             }, this),
                             " Github Username"
                         ]
                     }, void 0, true, {
                         fileName: "src/components/Navbar.jsx",
-                        lineNumber: 11,
+                        lineNumber: 21,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -18644,30 +18651,33 @@ function Navbar() {
                         placeholder: "Enter UserName",
                         className: "w-96 h-7 border-2 border-cyan-600 rounded-md",
                         onKeyDown: (e)=>{
-                            if (e.key == 'Enter') setUsername(e.target.value);
+                            if (e.key == 'Enter') {
+                                setUsername(e.target.value);
+                                name = UserName;
+                            }
                         }
                     }, void 0, false, {
                         fileName: "src/components/Navbar.jsx",
-                        lineNumber: 14,
+                        lineNumber: 24,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/Navbar.jsx",
-                lineNumber: 10,
+                lineNumber: 20,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _userDetailDefault.default), {
-                name: UserName
+                data: data
             }, void 0, false, {
                 fileName: "src/components/Navbar.jsx",
-                lineNumber: 20,
+                lineNumber: 31,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true);
 }
-_s(Navbar, "rhpFZekOjWgbMYVCmrX9X8oSSKs=");
+_s(Navbar, "O9iUMFhceixRaFMokuAkKf33xt0=");
 _c = Navbar;
 var _c;
 $RefreshReg$(_c, "Navbar");
@@ -18863,11 +18873,9 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>UserDetail);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-function UserDetail({ name }) {
-    let data;
-    fetch(`https://api.github.com/users/${name}`).then((res)=>res.json()).then((data)=>data).catch((err)=>console.log(err));
-    data && fetch(data.repourl);
+function UserDetail({ data }) {
     console.log(data);
+    let repo = [];
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
             className: "flex-col justify-items-center",
@@ -18879,7 +18887,7 @@ function UserDetail({ name }) {
                             children: "Overview For "
                         }, void 0, false, {
                             fileName: "src/components/UserDetail.jsx",
-                            lineNumber: 20,
+                            lineNumber: 11,
                             columnNumber: 17
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
@@ -18887,13 +18895,13 @@ function UserDetail({ name }) {
                             children: name ? data ? data : "user not found" : "User"
                         }, void 0, false, {
                             fileName: "src/components/UserDetail.jsx",
-                            lineNumber: 21,
+                            lineNumber: 12,
                             columnNumber: 17
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/UserDetail.jsx",
-                    lineNumber: 19,
+                    lineNumber: 10,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -18905,7 +18913,7 @@ function UserDetail({ name }) {
                             alt: "Profile"
                         }, void 0, false, {
                             fileName: "src/components/UserDetail.jsx",
-                            lineNumber: 24,
+                            lineNumber: 15,
                             columnNumber: 17
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -18916,7 +18924,7 @@ function UserDetail({ name }) {
                                     children: data ? data.login : "user"
                                 }, void 0, false, {
                                     fileName: "src/components/UserDetail.jsx",
-                                    lineNumber: 26,
+                                    lineNumber: 17,
                                     columnNumber: 21
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -18928,7 +18936,7 @@ function UserDetail({ name }) {
                                             alt: "location"
                                         }, void 0, false, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 27,
+                                            lineNumber: 18,
                                             columnNumber: 69
                                         }, this),
                                         " ",
@@ -18936,7 +18944,7 @@ function UserDetail({ name }) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/UserDetail.jsx",
-                                    lineNumber: 27,
+                                    lineNumber: 18,
                                     columnNumber: 21
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
@@ -18949,7 +18957,7 @@ function UserDetail({ name }) {
                                             alt: "link"
                                         }, void 0, false, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 28,
+                                            lineNumber: 19,
                                             columnNumber: 85
                                         }, this),
                                         " ",
@@ -18957,19 +18965,19 @@ function UserDetail({ name }) {
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/UserDetail.jsx",
-                                    lineNumber: 28,
+                                    lineNumber: 19,
                                     columnNumber: 21
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/UserDetail.jsx",
-                            lineNumber: 25,
+                            lineNumber: 16,
                             columnNumber: 17
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/UserDetail.jsx",
-                    lineNumber: 23,
+                    lineNumber: 14,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -18983,7 +18991,7 @@ function UserDetail({ name }) {
                             children: "Follow"
                         }, void 0, false, {
                             fileName: "src/components/UserDetail.jsx",
-                            lineNumber: 32,
+                            lineNumber: 23,
                             columnNumber: 17
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -18997,13 +19005,13 @@ function UserDetail({ name }) {
                                             children: data ? data.followers : 0
                                         }, void 0, false, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 37,
+                                            lineNumber: 28,
                                             columnNumber: 37
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/UserDetail.jsx",
-                                    lineNumber: 37,
+                                    lineNumber: 28,
                                     columnNumber: 21
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -19014,13 +19022,13 @@ function UserDetail({ name }) {
                                             children: data ? data.following : 0
                                         }, void 0, false, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 38,
+                                            lineNumber: 29,
                                             columnNumber: 36
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/UserDetail.jsx",
-                                    lineNumber: 38,
+                                    lineNumber: 29,
                                     columnNumber: 21
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -19031,13 +19039,13 @@ function UserDetail({ name }) {
                                             children: data ? data.public_repos : 0
                                         }, void 0, false, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 39,
+                                            lineNumber: 30,
                                             columnNumber: 39
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/UserDetail.jsx",
-                                    lineNumber: 39,
+                                    lineNumber: 30,
                                     columnNumber: 21
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -19048,25 +19056,25 @@ function UserDetail({ name }) {
                                             children: data ? data.public_gists : 0
                                         }, void 0, false, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 40,
+                                            lineNumber: 31,
                                             columnNumber: 39
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/UserDetail.jsx",
-                                    lineNumber: 40,
+                                    lineNumber: 31,
                                     columnNumber: 21
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/UserDetail.jsx",
-                            lineNumber: 36,
+                            lineNumber: 27,
                             columnNumber: 17
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/UserDetail.jsx",
-                    lineNumber: 31,
+                    lineNumber: 22,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -19077,7 +19085,7 @@ function UserDetail({ name }) {
                             children: "Repositories"
                         }, void 0, false, {
                             fileName: "src/components/UserDetail.jsx",
-                            lineNumber: 44,
+                            lineNumber: 35,
                             columnNumber: 17
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -19095,29 +19103,29 @@ function UserDetail({ name }) {
                                                     alt: "repo"
                                                 }, void 0, false, {
                                                     fileName: "src/components/UserDetail.jsx",
-                                                    lineNumber: 47,
+                                                    lineNumber: 38,
                                                     columnNumber: 66
                                                 }, this),
                                                 " ",
-                                                data ? repo[0].name : "not found"
+                                                data ? repo[0] ? repo[0].name : "not found" : "not found"
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 47,
+                                            lineNumber: 38,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                             className: "text-gray-600",
-                                            children: data ? repo[0].description : "not found"
+                                            children: data ? repo[0] ? repo[0].description : "not found" : "not found"
                                         }, void 0, false, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 48,
+                                            lineNumber: 39,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                             className: "text-gray-600",
                                             children: [
-                                                data ? repo[0].language : "not found",
+                                                data ? repo[0] ? repo[0].language : "not found" : "not found",
                                                 "  ",
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
                                                     className: "w-[0.6rem]",
@@ -19125,8 +19133,8 @@ function UserDetail({ name }) {
                                                     alt: "like"
                                                 }, void 0, false, {
                                                     fileName: "src/components/UserDetail.jsx",
-                                                    lineNumber: 49,
-                                                    columnNumber: 93
+                                                    lineNumber: 40,
+                                                    columnNumber: 115
                                                 }, this),
                                                 " 0 ",
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
@@ -19135,57 +19143,125 @@ function UserDetail({ name }) {
                                                     alt: ""
                                                 }, void 0, false, {
                                                     fileName: "src/components/UserDetail.jsx",
-                                                    lineNumber: 49,
-                                                    columnNumber: 218
+                                                    lineNumber: 40,
+                                                    columnNumber: 240
                                                 }, this),
                                                 " 0 "
                                             ]
                                         }, void 0, true, {
+                                            fileName: "src/components/UserDetail.jsx",
+                                            lineNumber: 40,
+                                            columnNumber: 25
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "src/components/UserDetail.jsx",
+                                    lineNumber: 37,
+                                    columnNumber: 21
+                                }, this),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                    className: "border-solid border border-gray-400 w-[10rem] min-h-[5rem] rounded-md pl-2",
+                                    children: [
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                            className: "font-medium text-blue-800",
+                                            children: [
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                                                    className: "w-[0.54rem]",
+                                                    src: "https://www.svgrepo.com/show/448449/git-repo.svg",
+                                                    alt: "repo"
+                                                }, void 0, false, {
+                                                    fileName: "src/components/UserDetail.jsx",
+                                                    lineNumber: 43,
+                                                    columnNumber: 62
+                                                }, this),
+                                                " ",
+                                                data ? repo[1] ? repo[1].name : "not found" : "not found"
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "src/components/UserDetail.jsx",
+                                            lineNumber: 43,
+                                            columnNumber: 21
+                                        }, this),
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                            className: "text-gray-600",
+                                            children: data ? repo[1] ? repo[1].description : "not found" : "not found"
+                                        }, void 0, false, {
+                                            fileName: "src/components/UserDetail.jsx",
+                                            lineNumber: 44,
+                                            columnNumber: 25
+                                        }, this),
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                            className: "text-gray-600",
+                                            children: [
+                                                data ? repo[1] ? repo[1].language : "not found" : "not found",
+                                                " ",
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                                                    className: "w-[0.6rem]",
+                                                    src: "https://upload.wikimedia.org/wikipedia/commons/1/18/Five-pointed_star.svg",
+                                                    alt: "like"
+                                                }, void 0, false, {
+                                                    fileName: "src/components/UserDetail.jsx",
+                                                    lineNumber: 45,
+                                                    columnNumber: 114
+                                                }, this),
+                                                " 0 ",
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                                                    className: "h-[0.5rem]",
+                                                    src: "https://upload.wikimedia.org/wikipedia/commons/d/dd/Octicons-repo-forked.svg",
+                                                    alt: ""
+                                                }, void 0, false, {
+                                                    fileName: "src/components/UserDetail.jsx",
+                                                    lineNumber: 45,
+                                                    columnNumber: 239
+                                                }, this),
+                                                " 0 "
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "src/components/UserDetail.jsx",
+                                            lineNumber: 45,
+                                            columnNumber: 25
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "src/components/UserDetail.jsx",
+                                    lineNumber: 42,
+                                    columnNumber: 21
+                                }, this),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                    className: "border-solid border border-gray-400 w-[10rem] min-h-[5rem] rounded-md pl-2",
+                                    children: [
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                            className: "font-medium text-blue-800",
+                                            children: [
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                                                    className: "w-[0.54rem]",
+                                                    src: "https://www.svgrepo.com/show/448449/git-repo.svg",
+                                                    alt: "repo"
+                                                }, void 0, false, {
+                                                    fileName: "src/components/UserDetail.jsx",
+                                                    lineNumber: 48,
+                                                    columnNumber: 62
+                                                }, this),
+                                                " ",
+                                                data ? repo[2] ? repo[2].name : "not found" : "not found"
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "src/components/UserDetail.jsx",
+                                            lineNumber: 48,
+                                            columnNumber: 21
+                                        }, this),
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                            className: "text-gray-600",
+                                            children: data ? repo[2] ? repo[2].description : "not found" : "not found"
+                                        }, void 0, false, {
                                             fileName: "src/components/UserDetail.jsx",
                                             lineNumber: 49,
                                             columnNumber: 25
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "src/components/UserDetail.jsx",
-                                    lineNumber: 46,
-                                    columnNumber: 21
-                                }, this),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                    className: "border-solid border border-gray-400 w-[10rem] min-h-[5rem] rounded-md pl-2",
-                                    children: [
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                            className: "font-medium text-blue-800",
-                                            children: [
-                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                                                    className: "w-[0.54rem]",
-                                                    src: "https://www.svgrepo.com/show/448449/git-repo.svg",
-                                                    alt: "repo"
-                                                }, void 0, false, {
-                                                    fileName: "src/components/UserDetail.jsx",
-                                                    lineNumber: 52,
-                                                    columnNumber: 62
-                                                }, this),
-                                                " ",
-                                                data ? repo[1].name : "not found"
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 52,
-                                            columnNumber: 21
-                                        }, this),
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                            className: "text-gray-600",
-                                            children: data ? repo[1].description : "not found"
-                                        }, void 0, false, {
-                                            fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 53,
-                                            columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                             className: "text-gray-600",
                                             children: [
-                                                data ? repo[1].language : "not found",
+                                                data ? repo[2] ? repo[2].language : "not found" : "not found",
                                                 " ",
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
                                                     className: "w-[0.6rem]",
@@ -19193,8 +19269,8 @@ function UserDetail({ name }) {
                                                     alt: "like"
                                                 }, void 0, false, {
                                                     fileName: "src/components/UserDetail.jsx",
-                                                    lineNumber: 54,
-                                                    columnNumber: 92
+                                                    lineNumber: 50,
+                                                    columnNumber: 114
                                                 }, this),
                                                 " 0 ",
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
@@ -19203,106 +19279,38 @@ function UserDetail({ name }) {
                                                     alt: ""
                                                 }, void 0, false, {
                                                     fileName: "src/components/UserDetail.jsx",
-                                                    lineNumber: 54,
-                                                    columnNumber: 217
+                                                    lineNumber: 50,
+                                                    columnNumber: 239
                                                 }, this),
                                                 " 0 "
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 54,
+                                            lineNumber: 50,
                                             columnNumber: 25
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/UserDetail.jsx",
-                                    lineNumber: 51,
-                                    columnNumber: 21
-                                }, this),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                    className: "border-solid border border-gray-400 w-[10rem] min-h-[5rem] rounded-md pl-2",
-                                    children: [
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                            className: "font-medium text-blue-800",
-                                            children: [
-                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                                                    className: "w-[0.54rem]",
-                                                    src: "https://www.svgrepo.com/show/448449/git-repo.svg",
-                                                    alt: "repo"
-                                                }, void 0, false, {
-                                                    fileName: "src/components/UserDetail.jsx",
-                                                    lineNumber: 57,
-                                                    columnNumber: 62
-                                                }, this),
-                                                " ",
-                                                data ? repo[2].name : "not found"
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 57,
-                                            columnNumber: 21
-                                        }, this),
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                            className: "text-gray-600",
-                                            children: data ? repo[2].description : "not found"
-                                        }, void 0, false, {
-                                            fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 58,
-                                            columnNumber: 25
-                                        }, this),
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                            className: "text-gray-600",
-                                            children: [
-                                                data ? repo[2].language : "not found",
-                                                " ",
-                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                                                    className: "w-[0.6rem]",
-                                                    src: "https://upload.wikimedia.org/wikipedia/commons/1/18/Five-pointed_star.svg",
-                                                    alt: "like"
-                                                }, void 0, false, {
-                                                    fileName: "src/components/UserDetail.jsx",
-                                                    lineNumber: 59,
-                                                    columnNumber: 92
-                                                }, this),
-                                                " 0 ",
-                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                                                    className: "h-[0.5rem]",
-                                                    src: "https://upload.wikimedia.org/wikipedia/commons/d/dd/Octicons-repo-forked.svg",
-                                                    alt: ""
-                                                }, void 0, false, {
-                                                    fileName: "src/components/UserDetail.jsx",
-                                                    lineNumber: 59,
-                                                    columnNumber: 217
-                                                }, this),
-                                                " 0 "
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "src/components/UserDetail.jsx",
-                                            lineNumber: 59,
-                                            columnNumber: 25
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "src/components/UserDetail.jsx",
-                                    lineNumber: 56,
+                                    lineNumber: 47,
                                     columnNumber: 21
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/UserDetail.jsx",
-                            lineNumber: 45,
+                            lineNumber: 36,
                             columnNumber: 17
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/UserDetail.jsx",
-                    lineNumber: 43,
+                    lineNumber: 34,
                     columnNumber: 13
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/components/UserDetail.jsx",
-            lineNumber: 18,
+            lineNumber: 9,
             columnNumber: 9
         }, this)
     }, void 0, false);

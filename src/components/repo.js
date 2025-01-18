@@ -4,6 +4,44 @@ fetch(`https://api.github.com/users/iamsaqib24/repos`)
     .then(data=> console.log(data))
     .catch(err=> console.log(err))
 
+
+
+    const data0={
+        "login": "iamsaqib24",
+        "id": 96372222,
+        "node_id": "U_kgDOBb6F_g",
+        "avatar_url": "https://avatars.githubusercontent.com/u/96372222?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/iamsaqib24",
+        "html_url": "https://github.com/iamsaqib24",
+        "followers_url": "https://api.github.com/users/iamsaqib24/followers",
+        "following_url": "https://api.github.com/users/iamsaqib24/following{/other_user}",
+        "gists_url": "https://api.github.com/users/iamsaqib24/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/iamsaqib24/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/iamsaqib24/subscriptions",
+        "organizations_url": "https://api.github.com/users/iamsaqib24/orgs",
+        "repos_url": "https://api.github.com/users/iamsaqib24/repos",
+        "events_url": "https://api.github.com/users/iamsaqib24/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/iamsaqib24/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false,
+        "name": "Saqib",
+        "company": null,
+        "blog": "https://iamsaqib.in",
+        "location": "India",
+        "email": null,
+        "hireable": null,
+        "bio": null,
+        "twitter_username": "iamsaqib24",
+        "public_repos": 46,
+        "public_gists": 0,
+        "followers": 10,
+        "following": 6,
+        "created_at": "2021-12-19T09:31:17Z",
+        "updated_at": "2025-01-10T12:22:52Z"
+      }
+
     const data={
         "id": 527602432,
         "node_id": "R_kgDOH3KTAA",
